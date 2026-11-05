@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block title %}Gestión{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <p class="eyebrow">Área interna</p>
+    <h1>Gestión patrimonial</h1>
+    <p>Hola, {{ user.username }}. Aquí puedes revisar los lugares registrados.</p>
+</div>
+<div class="toolbar">
+    {% if perms.core.add_lugarpatrimonial %}<a class="button" href="{% url 'agregar_lugar' %}">Agregar lugar</a>{% endif %}
+    {% if user.is_staff %}<a class="button button-secondary" href="{% url 'admin:index' %}">Administrar categorías</a>{% endif %}
+</div>
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Lugar</th><th>Categoría</th><th>Ubicación</th><th>Acción</th></tr></thead>
+        <tbody>
+        {% for lugar in lugares %}
+            <tr>
+                <td>{{ lugar.nombre }}</td><td>{{ lugar.categoria.nombre }}</td><td>{{ lugar.ubicacion }}</td>
+                <td>{% if perms.core.change_lugarpatrimonial %}<a href="{% url 'editar_lugar' lugar.id %}">Editar</a>{% else %}<a href="{% url 'detalle' lugar.id %}">Ver</a>{% endif %}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">Todavía no hay lugares registrados.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

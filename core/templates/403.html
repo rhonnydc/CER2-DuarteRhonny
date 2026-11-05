@@ -1,0 +1,5 @@
+{% extends 'core/base.html' %}
+{% block title %}Sin permiso{% endblock %}
+{% block content %}
+<div class="page-heading"><h1>No tienes permiso para esta acción</h1><p>Tu sesión está activa, pero necesitas el permiso correspondiente.</p><a href="{% url 'gestion' %}">Volver a gestión</a></div>
+{% endblock %}

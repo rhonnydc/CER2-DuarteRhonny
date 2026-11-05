@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Fundación Patrimonio Vivo</p>
+    <h1>Conoce los lugares que cuentan nuestra historia.</h1>
+    <p>Reunimos información de edificios, monumentos, murales y otros espacios patrimoniales de Chile para que todas las personas puedan explorarlos.</p>
+    <a class="button" href="{% url 'catalogo' %}">Explorar catálogo</a>
+</section>
+<section class="section-intro">
+    <h2>Un catálogo abierto</h2>
+    <p>Consulta cada lugar, revisa su ubicación y filtra por categoría. El equipo de la fundación mantiene la información desde una sección interna.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block title %}Ingresar{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">Área interna</p><h1>Iniciar sesión</h1></div>
+<form method="post" class="form-card narrow-form">
+    {% csrf_token %}
+    {% if form.errors %}<p class="form-errors">Usuario o contraseña incorrectos.</p>{% endif %}
+    <div class="form-row"><label for="id_username">Usuario</label>{{ form.username }}</div>
+    <div class="form-row"><label for="id_password">Contraseña</label>{{ form.password }}</div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="button" type="submit">Ingresar</button>
+</form>
+{% endblock %}

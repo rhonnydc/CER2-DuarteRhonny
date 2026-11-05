@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block title %}Catálogo{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <p class="eyebrow">Explorar</p>
+    <h1>Catálogo patrimonial</h1>
+    <p>Elige una categoría para ver sus lugares.</p>
+</div>
+<div class="filters" aria-label="Filtrar por categoría">
+    <a class="chip {% if not categoria_actual %}chip-active{% endif %}" href="{% url 'catalogo' %}">Todas</a>
+    {% for categoria in categorias %}
+        <a class="chip {% if categoria_actual.id == categoria.id %}chip-active{% endif %}" href="{% url 'catalogo_categoria' categoria.id %}">{{ categoria.nombre }}</a>
+    {% endfor %}
+</div>
+{% if categoria_actual %}<h2 class="filter-heading">{{ categoria_actual.nombre }}</h2>{% endif %}
+<div class="card-grid">
+    {% for lugar in lugares %}
+        <article class="card">
+            {% if lugar.imagen %}<img class="card-image" src="{{ lugar.imagen }}" alt="{{ lugar.nombre }}">{% else %}<div class="image-placeholder">Patrimonio Vivo</div>{% endif %}
+            <div class="card-body">
+                <span class="tag">{{ lugar.categoria.nombre }}</span>
+                <h2>{{ lugar.nombre }}</h2>
+                <p>{{ lugar.ubicacion }}</p>
+                <a href="{% url 'detalle' lugar.id %}">Ver detalle →</a>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty-state">Aún no hay lugares en esta selección.</p>
+    {% endfor %}
+</div>
+{% endblock %}
